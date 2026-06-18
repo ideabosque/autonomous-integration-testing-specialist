@@ -1,0 +1,668 @@
+# Autonomous Integration Testing Specialist - Skill Configuration
+# This file contains all configurable parameters for the skill.
+# Precedence: (1) Explicit user request -> (2) Existing project conventions -> (3) .env values -> (4) This file -> (5) Built-in defaults in SKILL.md
+
+skill:
+  name: "autonomous-integration-testing-specialist"
+  version: "2.0.0"
+  description: "Autonomous integration testing, environment provisioning, dependency readiness, end-to-end workflow validation, data integrity reconciliation, and production certification"
+  author: "SilvaEngine Development Team"
+
+# Optional .env override keys for local generation defaults.
+# User instructions take precedence over these values.
+env_overrides:
+  config_path: "AIT_CONFIG_PATH"
+  reference_directory: "AIT_REFERENCE_DIR"
+  script_directory: "AIT_SCRIPT_DIR"
+  output_directory: "AIT_OUTPUT_DIR"
+  environment_target: "AIT_ENVIRONMENT_TARGET"
+  cert_report_format: "AIT_CERT_REPORT_FORMAT"
+
+# Directory paths (relative to skill root unless overridden)
+# `reference` is bundled with the skill; `script` and `output` are created at
+# runtime to hold generated artifacts (creation scripts, reports).
+directories:
+  reference: "../references"
+  script: "./scripts"
+  output: "./output"
+
+# Business domain settings
+business_domain:
+  # Supported business domains with their default dependency sequence
+  supported_domains:
+    - ecommerce
+    - logistics
+    - finance
+    - healthcare
+    - iot
+    - generic
+
+  # Domain-specific configurations
+  domain_configs:
+    ecommerce:
+      default_execution_sequence:
+        - foundation
+        - master_data
+        - customer
+        - product
+        - pricing
+        - rfq
+        - quote
+        - order
+        - fulfillment
+        - billing
+      core_dependencies:
+        - customer_management
+        - product_management
+        - pricing_engine
+        - rfq_engine
+        - quotation_engine
+        - order_management
+        - inventory_management
+        - vendor_management
+      transaction_workflows:
+        - customer_lifecycle
+        - product_lifecycle
+        - rfq_workflow
+        - quotation_workflow
+        - order_workflow
+    logistics:
+      default_execution_sequence:
+        - foundation
+        - master_data
+        - carrier
+        - shipment
+        - tracking
+        - warehouse
+        - delivery
+        - billing
+      core_dependencies:
+        - carrier_management
+        - shipment_management
+        - tracking_service
+        - warehouse_management
+        - delivery_management
+      transaction_workflows:
+        - shipment_lifecycle
+        - delivery_workflow
+    finance:
+      default_execution_sequence:
+        - foundation
+        - master_data
+        - account
+        - transaction
+        - payment
+        - invoice
+        - reconciliation
+      core_dependencies:
+        - account_management
+        - transaction_processing
+        - payment_gateway
+        - invoice_management
+        - reconciliation_engine
+      transaction_workflows:
+        - payment_workflow
+        - invoice_workflow
+    healthcare:
+      default_execution_sequence:
+        - foundation
+        - master_data
+        - patient
+        - appointment
+        - prescription
+        - medical_record
+        - billing
+      core_dependencies:
+        - patient_management
+        - appointment_scheduling
+        - prescription_management
+        - medical_records
+      transaction_workflows:
+        - patient_lifecycle
+        - appointment_workflow
+    iot:
+      default_execution_sequence:
+        - foundation
+        - master_data
+        - device
+        - sensor
+        - reading
+        - alert
+        - action
+      core_dependencies:
+        - device_management
+        - sensor_management
+        - data_ingestion
+        - alert_engine
+        - action_processor
+      transaction_workflows:
+        - device_lifecycle
+        - alert_workflow
+    generic:
+      default_execution_sequence:
+        - foundation
+        - master_data
+        - entity_crud
+        - workflow
+        - integration
+        - reporting
+      core_dependencies: []
+      transaction_workflows: []
+
+# Infrastructure settings
+infrastructure:
+  # Supported compute platforms to discover
+  compute_platforms:
+    - kubernetes
+    - ecs
+    - lambda
+    - ec2
+    - vm
+    - docker_compose
+
+  # Supported data stores to discover
+  data_stores:
+    - postgresql
+    - mysql
+    - mongodb
+    - dynamodb
+    - redis
+    - neo4j
+    - opensearch
+    - elasticsearch
+    - sqlite
+
+  # Data store capabilities for test strategy selection
+  data_store_capabilities:
+    postgresql:
+      supports_transactions: true
+      supports_foreign_keys: true
+      supports_stored_procedures: true
+      supports_views: true
+      supports_full_text_search: true
+    mysql:
+      supports_transactions: true
+      supports_foreign_keys: true
+      supports_stored_procedures: true
+      supports_views: true
+      supports_full_text_search: true
+    mongodb:
+      supports_transactions: true
+      supports_foreign_keys: false
+      supports_stored_procedures: false
+      supports_views: false
+      supports_full_text_search: true
+    dynamodb:
+      supports_transactions: true
+      supports_foreign_keys: false
+      supports_stored_procedures: false
+      supports_views: false
+      supports_full_text_search: false
+    redis:
+      supports_transactions: true
+      supports_foreign_keys: false
+      supports_stored_procedures: false
+      supports_views: false
+      supports_full_text_search: true
+    neo4j:
+      supports_transactions: true
+      supports_foreign_keys: false
+      supports_stored_procedures: true
+      supports_views: false
+      supports_full_text_search: true
+    opensearch:
+      supports_transactions: false
+      supports_foreign_keys: false
+      supports_stored_procedures: false
+      supports_views: false
+      supports_full_text_search: true
+    elasticsearch:
+      supports_transactions: false
+      supports_foreign_keys: false
+      supports_stored_procedures: false
+      supports_views: false
+      supports_full_text_search: true
+    sqlite:
+      supports_transactions: true
+      supports_foreign_keys: true
+      supports_stored_procedures: false
+      supports_views: true
+      supports_full_text_search: false
+
+  # Supported integration middleware to discover
+  integration_middleware:
+    - api_gateway
+    - message_queue
+    - event_bus
+    - workflow_engine
+    - graphql_gateway
+
+  # Supported storage systems to discover
+  storage_systems:
+    - s3
+    - shared_storage
+    - filesystem
+
+# Environment validation settings
+environment:
+  # Required validation checkpoints
+  validation_checkpoints:
+    - environment_variables
+    - credentials
+    - secrets
+    - api_endpoints
+    - connection_strings
+    - security_settings
+    - service_health
+
+  # Auto-validate on skill invocation
+  auto_validate: true
+
+  # Stop testing on environment validation failure
+  block_on_failure: true
+
+  # Timeout settings for health checks (seconds)
+  health_check_timeout: 30
+
+  # Number of retries for transient validation failures
+  validation_retries: 3
+
+# Schema provisioning settings
+schema:
+  # Resources that can be auto-provisioned when missing
+  provisionable_resources:
+    - databases
+    - schemas
+    - tables
+    - collections
+    - indexes
+    - constraints
+    - views
+
+  # Validation depth for schema certification
+  certification_checks:
+    - accessibility
+    - referential_integrity
+    - index_readiness
+    - query_readiness
+
+  # Require explicit approval before destructive schema changes
+  require_approval_for_destructive: true
+
+  # Include stored procedures in schema discovery
+  include_stored_procedures: true
+
+# Dependency settings
+dependency:
+  # Internal dependency categories
+  internal_categories:
+    - customer_management
+    - product_management
+    - pricing_engine
+    - rfq_engine
+    - quotation_engine
+    - order_management
+    - inventory_management
+    - vendor_management
+    - workflow_engine
+    - notification_services
+    - shared_services
+    - authentication
+    - logging
+    - monitoring
+    - configuration_services
+
+  # Infrastructure dependency categories
+  infrastructure_categories:
+    - databases
+    - queues
+    - event_buses
+    - search_services
+    - storage_systems
+
+  # External dependency categories
+  external_categories:
+    - erp_systems
+    - crm_systems
+    - payment_gateways
+    - marketplace_integrations
+    - supplier_apis
+
+  # Dependency readiness certification states (must pass all in order)
+  readiness_states:
+    - available
+    - configured
+    - initialized
+    - operational
+
+  # Block testing until all dependencies pass readiness certification
+  block_until_certified: true
+
+  # Timeout for individual dependency health checks (seconds)
+  health_check_timeout: 15
+
+  # Automatic retry for transient dependency failures
+  auto_retry:
+    enabled: true
+    max_attempts: 3
+    delay_seconds: 5
+
+# Dependency relationship and execution order settings
+execution_order:
+  # Default domain-driven execution sequence
+  # Override per domain in business_domain.domain_configs
+  default_sequence:
+    - foundation
+    - master_data
+    - customer
+    - product
+    - pricing
+    - rfq
+    - quote
+    - order
+    - fulfillment
+    - billing
+
+  # Allow project-specific override of execution order
+  allow_override: true
+
+  # Fallback strategy when dependency order cannot be determined
+  fallback_strategy: "topological_sort"
+
+# Testing plan settings
+testing_plan:
+  # Required plan elements
+  required_elements:
+    - objectives
+    - scope
+    - assumptions
+    - risks
+    - test_strategy
+    - test_execution_order
+    - validation_criteria
+    - exit_criteria
+
+  # Default test strategy when none specified
+  default_strategy: "dependency_driven"
+
+  # Coverage threshold for exit criteria (percentage)
+  minimum_coverage_threshold: 80
+
+# Test asset categories
+test_assets:
+  customer_assets:
+    - customers
+    - contacts
+    - addresses
+  product_assets:
+    - products
+    - inventory
+    - pricing
+  supplier_assets:
+    - suppliers
+    - contracts
+    - certifications
+  user_assets:
+    - administrators
+    - buyers
+    - supplier_users
+    - sales_representatives
+
+  # Default number of test entities per asset type
+  default_entity_count: 5
+
+  # Generate realistic data patterns (not lorem ipsum)
+  realistic_data: true
+
+# Integration test coverage areas
+test_coverage:
+  api_operations:
+    - crud
+    - authentication
+    - authorization
+    - error_handling
+  database_operations:
+    - inserts
+    - updates
+    - deletes
+    - queries
+  event_operations:
+    - publish
+    - consume
+    - retry
+  workflow_operations:
+    - end_to_end_execution
+    - state_transitions
+    - exception_handling
+
+  # Coverage depth per area: minimal, standard, thorough
+  default_depth: "standard"
+
+# End-to-end transaction workflows
+transaction_workflows:
+  customer_lifecycle:
+    description: "Validate customer creation through deactivation"
+    steps:
+      - create
+      - update
+      - activate
+      - deactivate
+    validation_points:
+      - entity_created
+      - state_transition_valid
+      - audit_log_recorded
+  product_lifecycle:
+    description: "Validate product creation through inventory synchronization"
+    steps:
+      - create
+      - update
+      - price
+      - inventory_sync
+    validation_points:
+      - entity_created
+      - pricing_consistent
+      - inventory_in_sync
+  rfq_workflow:
+    description: "Validate RFQ submission through approval"
+    steps:
+      - submission
+      - supplier_matching
+      - approval
+    validation_points:
+      - rfq_created
+      - suppliers_matched
+      - approval_granted
+  quotation_workflow:
+    description: "Validate quotation creation through acceptance"
+    steps:
+      - create
+      - revise
+      - approve
+      - accept
+    validation_points:
+      - quotation_created
+      - revision_tracked
+      - approval_granted
+      - acceptance_recorded
+  order_workflow:
+    description: "Validate order creation through payment"
+    steps:
+      - create
+      - allocate
+      - ship
+      - invoice
+      - pay
+    validation_points:
+      - order_created
+      - inventory_allocated
+      - shipment_dispatched
+      - invoice_generated
+      - payment_received
+
+# Failure and resilience test scenarios
+resilience_testing:
+  failure_scenarios:
+    - missing_data
+    - invalid_data
+    - api_failures
+    - database_failures
+    - queue_failures
+    - authentication_failures
+    - service_outages
+    - third_party_outages
+
+  # Expected system behavior per scenario
+  expected_behavior:
+    missing_data: "return_404_with_context"
+    invalid_data: "return_400_with_validation_details"
+    api_failures: "circuit_breaker_or_retry_with_fallback"
+    database_failures: "graceful_degradation_or_retry"
+    queue_failures: "dead_letter_queue_or_retry"
+    authentication_failures: "return_401_with_challenge"
+    service_outages: "circuit_breaker_or_cached_response"
+    third_party_outages: "degrade_gracefully_or_queue_for_retry"
+
+# Data reconciliation settings
+reconciliation:
+  integrity_checks:
+    - referential_integrity
+    - cross_system_consistency
+    - synchronization_accuracy
+  workflow_checks:
+    - completion_status
+    - state_consistency
+    - rule_enforcement
+  audit_checks:
+    - audit_logs
+    - event_logs
+    - transaction_history
+
+  # Tolerance thresholds for reconciliation mismatches
+  tolerance:
+    count_mismatch: 0
+    amount_mismatch: 0.01
+    timestamp_drift_seconds: 5
+
+# Certification settings
+certification:
+  # Final certification statuses
+  statuses:
+    - name: "integration_certified"
+      description: "All integration tests pass; all dependencies validated; no blocking defects"
+      blocking_defects_allowed: 0
+    - name: "ready_for_uat"
+      description: "Integration passed; minor defects or gaps remain for UAT to cover"
+      blocking_defects_allowed: 0
+    - name: "ready_for_production"
+      description: "Integration and UAT passed; system meets production criteria"
+      blocking_defects_allowed: 0
+    - name: "ready_with_conditions"
+      description: "Passing with documented caveats that must be resolved post-release"
+      blocking_defects_allowed: 0
+    - name: "not_ready"
+      description: "Blocking defects, missing dependencies, or unresolved infrastructure gaps"
+      blocking_defects_allowed: -1
+
+  # Minimum output required for certification
+  minimum_output:
+    - scope_tested
+    - dependencies_validated
+    - execution_order_used
+    - test_results_pass_fail_skipped_blocked
+    - workflow_and_data_integrity_findings
+    - defects_by_severity_and_root_cause
+    - open_risks_and_mitigation_plan
+    - final_certification_status
+
+  # Defect severity levels
+  severity_levels:
+    - blocking
+    - critical
+    - major
+    - minor
+    - informational
+
+# Safety settings
+safety:
+  # Require explicit approval for these provisioning actions
+  approval_required:
+    - privileged_access
+    - cloud_credentials
+    - production_access
+    - destructive_changes
+    - live_third_party_side_effects
+
+  # Auto-provision when environment is authorized and action is safe
+  auto_provision_when_safe: true
+
+  # Dry run mode: report what would be provisioned without executing
+  dry_run_mode: false
+
+  # Rollback on provisioning failure
+  rollback_on_failure: true
+
+# Reporting settings
+reporting:
+  # Report formats
+  supported_formats:
+    - markdown
+    - json
+    - html
+
+  # Default format
+  default_format: "markdown"
+
+  # Evidence standards
+  evidence_sources:
+    - code_paths
+    - config_files
+    - command_outputs
+    - api_responses
+    - database_checks
+    - logs
+    - test_results
+    - generated_scripts
+    - created_resources
+
+  # Mark unverified items explicitly
+  mark_unverified: true
+  unverified_labels:
+    - assumed
+    - unavailable
+    - blocked
+
+  # Never imply certification for untested components
+  strict_certification: true
+
+  # Include evidence snippets in reports
+  include_evidence: true
+
+  # Maximum evidence entries per report section
+  max_evidence_per_section: 10
+
+# Logging settings
+logging:
+  enabled: true
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "ait_execution.log"
+  console_output: true
+
+# Error handling settings
+error_handling:
+  auto_retry:
+    enabled: true
+    max_attempts: 3
+    delay_seconds: 2
+
+  fallback_to_partial: true
+  prompt_on_critical_error: true
+  continue_on_warning: true
+  stop_on_blocking_error: true
+
+  # Known error patterns and recommended recovery actions
+  recovery_patterns:
+    connection_timeout: "retry_with_exponential_backoff"
+    authentication_expired: "refresh_credentials_and_retry"
+    schema_not_found: "provision_schema_and_retry"
+    dependency_unavailable: "report_blocked_and_continue"

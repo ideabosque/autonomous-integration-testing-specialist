@@ -1,0 +1,7 @@
+interface:
+  display_name: "Autonomous Integration Testing Specialist"
+  short_description: "Certify integration readiness with evidence"
+  default_prompt: "Use $autonomous-integration-testing-specialist to assess integration readiness, prepare end-to-end tests, and produce an evidence-backed certification report."
+
+policy:
+  allow_implicit_invocation: true
