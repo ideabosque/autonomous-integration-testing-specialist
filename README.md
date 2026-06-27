@@ -19,7 +19,7 @@ checks are also ready.
 | `config/skill-config.yaml` | All tunable parameters: business domains, infrastructure, environment checks, schema, dependencies, execution order, coverage, workflows, resilience, reconciliation, certification, safety, and reporting. |
 | `references/phase-deliverables.md` | Per-phase checklist with objectives, sub-steps, config cross-references, and required deliverables. Loaded before running a phase or producing certification output. |
 | `references/integration-scenarios-sop-template.md` | Fillable Continuous Integration Scenarios SOP template. The skill requests a completed SOP on every run and offers this template when the user has none. |
-| `references/final-report-template.md` | Structure for the final certification report, including the per-call Function Results (input arguments + output) format. The skill writes the report into the target project's `docs/` directory. |
+| `references/final-report-template.md` | Structure for the final certification report, including the per-call Function Results (input arguments + output) format. The skill writes the report into the target project's `docs/test_results/` directory. |
 | `agents/interface.yaml` | Interface descriptor (display name, default prompt, invocation policy). |
 | `output/`, `scripts/` | Created at runtime to hold generated artifacts (reports, creation/test scripts). |
 

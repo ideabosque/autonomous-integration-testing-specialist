@@ -68,7 +68,7 @@ Load only the references needed for the current task:
 - `config/skill-config.yaml`: Read before checking defaults, supported platforms, stores, workflows, thresholds, or safety behavior.
 - `references/phase-deliverables.md`: Read before running a phase, planning full readiness work, or producing certification output.
 - `references/integration-scenarios-sop-template.md`: Read when the user has no integration scenarios SOP, so you can offer it as a fillable starting point.
-- `references/final-report-template.md`: Read before producing the final report. It defines the certification structure and the per-call input/output (Function Results) format, written into the target project's `docs/` directory.
+- `references/final-report-template.md`: Read before producing the final report. It defines the certification structure and the per-call input/output (Function Results) format, written into the target project's `docs/test_results/` directory.
 
 Configuration precedence:
 
@@ -196,7 +196,7 @@ Allowed certification statuses:
 | Ready with Conditions | Passing with documented caveats that must be resolved |
 | Not Ready | Blocking defects, missing dependencies, or unresolved infrastructure gaps remain |
 
-Write the final report into the **target project's `docs/` directory** (for example, `docs/integration_certification_report.md`, or a dated `docs/live_integration_results_<YYYYMMDD>.md`). Follow `references/final-report-template.md`. The report must include a **Function Results** section that records, for every function/tool/API call executed during the run, its method, status, elapsed time, the exact input **Arguments**, and the returned **Output** as JSON (truncating oversized payloads with a clear marker while keeping the relevant portion). Confirm or create the `docs/` directory before writing, and report the written path.
+Write the final report into the **target project's `docs/test_results/` directory** (for example, `docs/test_results/integration_certification_report.md`, or a dated `docs/test_results/live_integration_results_<YYYYMMDD>.md`). Follow `references/final-report-template.md`. The report must include a **Function Results** section that records, for every function/tool/API call executed during the run, its method, status, elapsed time, the exact input **Arguments**, and the returned **Output** as JSON (truncating oversized payloads with a clear marker while keeping the relevant portion). Confirm or create the `docs/test_results/` directory before writing, and report the written path.
 
 Deliver: Defect Analysis Report and Final Integration Testing Certification Report.
 
@@ -214,7 +214,7 @@ Include these sections whenever certifying readiness:
 - Open risks and mitigation plan
 - Final certification status
 
-The final report is written to the target project's `docs/` directory using `references/final-report-template.md`.
+The final report is written to the target project's `docs/test_results/` directory using `references/final-report-template.md`.
 
 ## Evidence Standard
 
@@ -230,6 +230,6 @@ Check for these before certifying:
 - Test data loads out of dependency order.
 - Cross-system reconciliation is skipped after transaction testing.
 - Failure and resilience scenarios are omitted without justification.
-- The final report omits per-call input arguments and output, or is not written to the project's `docs/`.
+- The final report omits per-call input arguments and output, or is not written to the project's `docs/test_results/`.
 - Provisioning runs in production without explicit safety approval.
 - Certification status does not match the configured semantics.

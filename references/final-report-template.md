@@ -1,9 +1,9 @@
 # Final Integration Testing Certification Report — Template
 
 > **How to use this template.** This is the structure for the final report the skill
-> writes into the **target project's `docs/` directory** (for example,
-> `docs/integration_certification_report.md`, or a dated name such as
-> `docs/live_integration_results_<YYYYMMDD>.md`). Fill every `<placeholder>`, and record
+> writes into the **target project's `docs/test_results/` directory** (for example,
+> `docs/test_results/integration_certification_report.md`, or a dated name such as
+> `docs/test_results/live_integration_results_<YYYYMMDD>.md`). Fill every `<placeholder>`, and record
 > the **input arguments and output for every function/tool/API call** in the Function
 > Results section. Keep `assumed`/`unavailable`/`blocked` labels for anything not
 > observed. Delete these guidance blockquotes in the generated report.
